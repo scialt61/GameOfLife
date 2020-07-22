@@ -1,6 +1,6 @@
 <template>
-    <div id="cell-container" v-bind:style="{ gridTemplateRows: gridStyle }">
-        <cell-row v-for="row in cells" v-bind:cells="row" />
+    <div id="cell-container" v-bind:style="{ gridTemplateRows: gridStyle() }">
+        <cell-row v-for="(row, index) in cells()" :key="index" v-bind:cells="row" v-bind:row="index" />
     </div>
 </template>
 
@@ -14,12 +14,18 @@
             "cell-row": CellRow
         },
 
-        computed: {
-            ...mapState(["cells", "rows"]),
+        methods: {
+            cells() {
+                return this.$store.state.cells;
+            },
+
+            rows() {
+                return this.$store.state.rows;
+            },
 
             // Returns the style for the gridTemplateRows property
-            gridStyle: function () {
-                return `repeat(${this.rows}, 40px)`;
+            gridStyle() {
+                return `repeat(${this.$store.state.rows}, 40px)`;
             }
         }
     };

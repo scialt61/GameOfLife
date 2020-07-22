@@ -1,14 +1,26 @@
 <template>
-    <div id="cell" v-bind:class="[activeClass]"></div>
+    <div v-on:click="setValue" v-bind:class="[activeClass]"></div>
 </template>
 
 <script>
     export default {
-        props: ["data"],
+        props: ["data", "row", "column"],
+
+        methods: {
+            // Sets the cell's value
+            setValue() {
+                this.$store.commit({
+                    type: "setCell",
+                    row: this.row,
+                    column: this.column,
+                    value: true
+                });
+            }
+        },
 
         computed: {
             // Returns the active class
-            activeClass: function() {
+            activeClass() {
                 return this.data ? "cell-on" : "cell-off";
             }
         }

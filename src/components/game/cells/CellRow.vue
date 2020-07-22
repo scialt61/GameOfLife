@@ -1,6 +1,6 @@
 <template>
-    <div id="cell-row" v-bind:style="{ gridTemplateColumns: gridStyle }">
-        <cell v-for="cell in cells" v-bind:data="cell" />
+    <div class="cell-row" v-bind:style="{ gridTemplateColumns: gridStyle }">
+        <cell v-for="(cell, index) in cells" :key="index" v-bind:data="cell" v-bind:row="row" v-bind:column="index" />
     </div>
 </template>
 
@@ -10,7 +10,7 @@
     import Cell from "./Cell.vue";
 
     export default {
-        props: ["cells"],
+        props: ["cells", "row"],
 
         components: {
             cell: Cell
@@ -20,7 +20,7 @@
             ...mapState(["columns"]),
 
             // Returns the style for the gridTemplateColumns property
-            gridStyle: function () {
+            gridStyle() {
                 return `repeat(${this.columns}, 40px)`;
             }
         }
@@ -28,7 +28,7 @@
 </script>
 
 <style scoped>
-    #cell-row {
+    .cell-row {
         display: grid;
     }
 </style>
