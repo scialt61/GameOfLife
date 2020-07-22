@@ -13,15 +13,6 @@ const new2DArray = (rows, cols, value) => {
     return result;
 }
 
-// Returns a new array with the value at the given index replaced by a new value
-const replaceAtIndex = (array, index, value) => {
-    return [
-        ...array.slice(0, index),
-        value,
-        ...array.slice(index + 1, array.length)
-    ];
-}
-
 export default new Vuex.Store({
     state: {
         // Represents the dimensions of the board

@@ -1,6 +1,6 @@
 <template>
-    <div class="cell-row" v-bind:style="{ gridTemplateColumns: gridStyle }">
-        <cell v-for="(cell, index) in cells" :key="index" v-bind:data="cell" v-bind:row="row" v-bind:column="index" />
+    <div id="cell-row" v-bind:style="{ gridTemplateColumns: gridStyle }">
+        <cell v-for="(cell, index) in cells" v-bind:data="cell" v-bind:row="row" />
     </div>
 </template>
 
@@ -20,7 +20,7 @@
             ...mapState(["columns"]),
 
             // Returns the style for the gridTemplateColumns property
-            gridStyle() {
+            gridStyle: function () {
                 return `repeat(${this.columns}, 40px)`;
             }
         }
@@ -28,7 +28,7 @@
 </script>
 
 <style scoped>
-    .cell-row {
+    #cell-row {
         display: grid;
     }
 </style>
