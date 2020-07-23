@@ -1,47 +1,60 @@
 <template>
-    <div v-on:click="setValue" v-bind:class="[activeClass]"></div>
+    <div @click="setValue()" v-bind:class="[cell.alive ? aliveClass : deadClass]">
+    </div>
 </template>
 
 <script>
     export default {
-        props: ["data", "row", "column"],
+        props: ["index"],
+
+        data() {
+            return {
+                aliveClass: "cell-alive",
+                deadClass: "cell-dead"
+            };
+        },
 
         methods: {
-            // Sets the cell's value
+            // Sets the value of the cell
             setValue() {
-                this.$store.commit({
-                    type: "setCell",
-                    row: this.row,
-                    column: this.column,
-                    value: true
-                });
+                this.setCellAt(this.row, this.column, true);
             }
         },
 
         computed: {
-            // Returns the active class
-            activeClass() {
-                return this.data ? "cell-on" : "cell-off";
+            // Returns the row the cell is in
+            row() {
+                return Math.floor(this.index / this.getNumColumns());
+            },
+
+            // Returns the column the cell is in
+            column() {
+                return this.index % this.getNumRows();
+            },
+
+            // Returns the value of the given cell
+            cell() {
+                return this.getCellAt(this.row, this.column);
             }
         }
     };
 </script>
 
 <style scoped>
-    .cell-off {
+    .cell-dead {
         border: 1px solid rgb(25, 25, 25);
     }
 
-    .cell-off:hover {
+    .cell-dead:hover {
         background-color: rgb(45, 45, 45);
     }
 
-    .cell-on {
+    .cell-alive {
         background-color: rgb(215, 215, 215);
         border: 1px solid rgb(195, 195, 195);
     }
 
-    .cell-on:hover {
+    .cell-alive:hover {
         background-color: rgb(235, 235, 235);
     }
 </style>
