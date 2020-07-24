@@ -1,5 +1,5 @@
 // Contains configs for development
 export default {
-    rows: 20,
-    columns: 20
+    rows: 21,
+    columns: 48 
 }

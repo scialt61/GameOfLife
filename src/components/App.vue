@@ -8,9 +8,21 @@
 <script>
     import GameContainer from "./game/GameContainer.vue";
 
+    import mixin from "../mixin.js";
+
     export default {
+        mixins: [mixin],
+
         components: {
             "game-container": GameContainer
+        },
+
+        created() {
+            setInterval(() => {
+                if (this.isActive()) {
+                    this.updateCells();
+                }
+            }, 250);
         }
     };
 </script>
