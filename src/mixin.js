@@ -10,7 +10,10 @@ export default {
             columns: 96,
 
             // Size of a cell in pixels
-            cellSize: 20
+            cellSize: 20,
+
+            // Tickrate in ms
+            tickRate: 200
         };
 
         // Default values
