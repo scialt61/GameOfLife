@@ -30,7 +30,7 @@ export default new Vuex.Store({
     mutations: {
         // Sets the value of a cell
         setCell(state, { row, column, value }) {
-            state.cells[row * state.rows + column].alive = value;
+            state.cells[row * state.columns + column].alive = value;
         }
     }
 });

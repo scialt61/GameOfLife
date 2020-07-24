@@ -1,5 +1,5 @@
 <template>
-    <div @click="setValue()" v-bind:class="[cellClass]">
+    <div @mousedown="setValue()" v-bind:class="[cellClass]">
     </div>
 </template>
 
@@ -22,7 +22,7 @@
 
             // Returns the column the cell is in
             column() {
-                return this.index % this.getNumRows();
+                return this.index % this.getNumColumns();
             },
 
             // Returns the class the cell should use
