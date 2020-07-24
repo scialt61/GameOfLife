@@ -15,12 +15,12 @@
         computed: {
             // Returns the style for the gridTemplateRows property
             gridRowStyle() {
-                return `repeat(${this.getNumRows()}, 40px)`;
+                return `repeat(${this.getNumRows()}, ${this.getCellSize()}px)`;
             },
 
             // Returns the style for the gridTemplateColumns property
             gridColumnStyle() {
-                return `repeat(${this.getNumColumns()}, 40px)`;
+                return `repeat(${this.getNumColumns()}, ${this.getCellSize()}px)`;
             }
         }
     };

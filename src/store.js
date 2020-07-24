@@ -23,6 +23,9 @@ export default new Vuex.Store({
         rows: config.rows,
         columns: config.columns,
 
+        // Represents the size of a cell in pixels
+        cellSize: config.cellSize,
+
         // Represents the cells used in the game (uses 1D array with getter functions)
         cells: filledArray(config.rows * config.columns, Cell(false)),
 

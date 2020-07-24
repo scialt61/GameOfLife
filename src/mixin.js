@@ -14,6 +14,11 @@ export default {
             return this.$store.state.columns;
         },
 
+        // Returns the cell size
+        getCellSize() {
+            return this.$store.state.cellSize;
+        },
+
         // Returns the array of cells
         getCells() {
             return this.$store.state.cells;
