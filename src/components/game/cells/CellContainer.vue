@@ -1,6 +1,6 @@
 <template>
     <div id="cell-container" v-bind:style="{ gridTemplateRows: gridRowStyle, gridTemplateColumns: gridColumnStyle }">
-        <cell v-for="(cell, index) in getCells()" v-bind:index="index" :key="index" />
+        <cell v-for="(cell, index) in getCells()" v-bind:alive="cell.alive" v-bind:index="index" :key="index" />
     </div>
 </template>
 

@@ -1,23 +1,16 @@
 <template>
-    <div @click="setValue()" v-bind:class="[cell.alive ? aliveClass : deadClass]">
+    <div @click="setValue()" v-bind:class="[cellClass]">
     </div>
 </template>
 
 <script>
     export default {
-        props: ["index"],
-
-        data() {
-            return {
-                aliveClass: "cell-alive",
-                deadClass: "cell-dead"
-            };
-        },
+        props: ["alive", "index"],
 
         methods: {
             // Sets the value of the cell
             setValue() {
-                this.setCellAt(this.row, this.column, true);
+                this.setCellAt(this.row, this.column, !this.alive);
             }
         },
 
@@ -32,9 +25,9 @@
                 return this.index % this.getNumRows();
             },
 
-            // Returns the value of the given cell
-            cell() {
-                return this.getCellAt(this.row, this.column);
+            // Returns the class the cell should use
+            cellClass() {
+                return this.alive ? "cell-alive" : "cell-dead";
             }
         }
     };

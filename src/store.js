@@ -1,3 +1,4 @@
+import Vue from "vue";
 import Vuex from "vuex";
 
 import config from "./config.js";
@@ -13,6 +14,8 @@ const filledArray = (length, cell) => {
 
     return array;
 }
+
+Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
