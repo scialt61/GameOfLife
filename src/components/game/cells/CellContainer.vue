@@ -1,25 +1,26 @@
 <template>
-    <div id="cell-container" v-bind:style="{ gridTemplateRows: gridStyle }">
-        <cell-row v-for="row in cells" v-bind:cells="row" />
+    <div id="cell-container" v-bind:style="{ gridTemplateRows: gridRowStyle, gridTemplateColumns: gridColumnStyle }">
+        <cell v-for="(cell, index) in getCells()" v-bind:alive="cell.alive" v-bind:index="index" :key="index" />
     </div>
 </template>
 
 <script>
-    import { mapState } from "vuex";
-
-    import CellRow from "./CellRow.vue";
+    import Cell from "./Cell.vue";
 
     export default {
         components: {
-            "cell-row": CellRow
+            "cell": Cell
         },
 
         computed: {
-            ...mapState(["cells", "rows"]),
-
             // Returns the style for the gridTemplateRows property
-            gridStyle: function () {
-                return `repeat(${this.rows}, 40px)`;
+            gridRowStyle() {
+                return `repeat(${this.getNumRows()}, 40px)`;
+            },
+
+            // Returns the style for the gridTemplateColumns property
+            gridColumnStyle() {
+                return `repeat(${this.getNumColumns()}, 40px)`;
             }
         }
     };

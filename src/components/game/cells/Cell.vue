@@ -1,35 +1,53 @@
 <template>
-    <div id="cell" v-bind:class="[activeClass]"></div>
+    <div @mousedown="setValue()" v-bind:class="[cellClass]">
+    </div>
 </template>
 
 <script>
     export default {
-        props: ["data"],
+        props: ["alive", "index"],
+
+        methods: {
+            // Sets the value of the cell
+            setValue() {
+                this.setCellAt(this.row, this.column, !this.alive);
+            }
+        },
 
         computed: {
-            // Returns the active class
-            activeClass: function() {
-                return this.data ? "cell-on" : "cell-off";
+            // Returns the row the cell is in
+            row() {
+                return this.getRow(this.index);
+            },
+
+            // Returns the column the cell is in
+            column() {
+                return this.getColumn(this.index);
+            },
+
+            // Returns the class the cell should use
+            cellClass() {
+                return this.alive ? "cell-alive" : "cell-dead";
             }
         }
     };
 </script>
 
 <style scoped>
-    .cell-off {
+    .cell-dead {
         border: 1px solid rgb(25, 25, 25);
     }
 
-    .cell-off:hover {
+    .cell-dead:hover {
         background-color: rgb(45, 45, 45);
     }
 
-    .cell-on {
+    .cell-alive {
         background-color: rgb(215, 215, 215);
         border: 1px solid rgb(195, 195, 195);
     }
 
-    .cell-on:hover {
+    .cell-alive:hover {
         background-color: rgb(235, 235, 235);
     }
 </style>
