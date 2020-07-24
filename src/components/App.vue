@@ -25,7 +25,7 @@
                 if (this.isActive()) {
                     this.updateCells();
                 }
-            }, this.configs.tickRate);
+            }, this.getTickRate());
         }
     };
 </script>
