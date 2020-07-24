@@ -18,6 +18,9 @@
         },
 
         created() {
+            // Initializes cell array
+            this.clearCells();
+
             setInterval(() => {
                 if (this.isActive()) {
                     this.updateCells();
