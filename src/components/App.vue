@@ -15,6 +15,14 @@
 
         components: {
             "game-container": GameContainer
+        },
+
+        created() {
+            setInterval(() => {
+                if (this.isActive()) {
+                    this.updateCells();
+                }
+            }, 250);
         }
     };
 </script>

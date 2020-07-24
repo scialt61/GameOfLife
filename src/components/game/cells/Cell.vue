@@ -17,12 +17,12 @@
         computed: {
             // Returns the row the cell is in
             row() {
-                return Math.floor(this.index / this.getNumColumns());
+                return this.getRow(this.index);
             },
 
             // Returns the column the cell is in
             column() {
-                return this.index % this.getNumColumns();
+                return this.getColumn(this.index);
             },
 
             // Returns the class the cell should use

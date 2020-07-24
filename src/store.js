@@ -36,6 +36,11 @@ export default new Vuex.Store({
             state.cells[row * state.columns + column].alive = value;
         },
 
+        // Sets the values of all cells
+        setCells(state, cells) {
+            state.cells = cells;
+        },
+
         // Sets if the game is active
         setActive(state, active) {
             state.active = active;

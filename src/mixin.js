@@ -1,3 +1,5 @@
+import Cell from "./classes/Cell.js";
+
 // Main mixin used for the game
 export default {
     methods: {
@@ -16,10 +18,20 @@ export default {
         getCells() {
             return this.$store.state.cells;
         },
+        
+        // Gets the row used by an index
+        getRow(index) {
+            return Math.floor(index / this.getNumColumns());
+        },
+
+        // Gets the column used by an index
+        getColumn(index) {
+            return index % this.getNumColumns();
+        },
 
         // Returns the row at the given index
         getRowAt(index) {
-            return this.getCells().slice(this.getNumColumns() * index, this.getNumRows() * (index + 1));
+            return this.getCells().slice(this.getNumColumns() * index, this.getNumColumns() * (index + 1));
         },
 
         // Returns the cell at the given index
@@ -36,6 +48,11 @@ export default {
             });
         },
 
+        // Sets the value of all cells
+        setCells(cells) {
+            this.$store.commit("setCells", cells);
+        },
+
         // Returns if the game is active
         isActive() {
             return this.$store.state.active;
@@ -49,7 +66,7 @@ export default {
         /* Helper functions */
         // Checks if an index (row, column) is valid
         isIndexValid(row, column) {
-            return row > -1 && column > -1 && row < this.getNumRows() && column < this.getNumColumns();
+            return row >= 0 && column >= 0 && row < this.getNumRows() && column < this.getNumColumns();
         },
         
         // Returns the neighbors of a cell
@@ -66,6 +83,32 @@ export default {
                 [row + 1, column + 1]
             ].filter(index => this.isIndexValid(index[0], index[1]))
             .map(index => this.getCellAt(index[0], index[1]));
+        },
+
+        // Returns if a cell at an index survives
+        shouldCellSurvive(index) {
+            let row = this.getRow(index);
+            let column = this.getColumn(index);
+
+            let cell = this.getCellAt(row, column);
+
+            let neighbors = this.getNeighborCells(row, column);
+
+            let countAliveNeighbors = neighbors.filter(cell => cell.alive).length;
+
+            // Rules of game of life
+            return countAliveNeighbors === 3 || (cell.alive && countAliveNeighbors === 2);
+        },
+
+        // Returns what the array of cells should look like after a tick
+        getResultOfTick() {
+            return this.getCells()
+                .map((_, index) => Cell(this.shouldCellSurvive(index)));
+        },
+
+        // Updates the cells
+        updateCells() {
+            this.setCells(this.getResultOfTick());
         }
     }
 };
