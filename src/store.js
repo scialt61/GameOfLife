@@ -28,7 +28,7 @@ export default new Vuex.Store({
         timesPaused: 0,
 
         // Tickrate of the simulation
-        tickRate: configs.tickRate
+        tickrate: configs.tickrate
     },
 
     mutations: {
@@ -53,8 +53,8 @@ export default new Vuex.Store({
         },
 
         // Sets the tick rate
-        setTickRate(state, value) {
-            state.tickRate = value;
+        setTickrate(state, value) {
+            state.tickrate = value;
         }
     }
 });

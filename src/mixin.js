@@ -13,7 +13,7 @@ export default {
             cellSize: 20,
 
             // Tickrate in ms
-            tickRate: 150
+            tickrate: 200
         };
 
         // Default values
@@ -136,14 +136,14 @@ export default {
             this.setTimesPaused(this.getTimesPaused() + 1);
         },
 
-        // Returns the tick rate
-        getTickRate() {
-            return this.$store.state.tickRate;
+        // Returns the tickrate
+        getTickrate() {
+            return this.$store.state.tickrate;
         },
 
-        // Sets the tick rate
-        setTickRate(value) {
-            this.$store.commit("setTickRate", value);
+        // Sets the tickrate
+        setTickrate(value) {
+            this.$store.commit("setTickrate", value);
         },
 
         /* Helper functions */

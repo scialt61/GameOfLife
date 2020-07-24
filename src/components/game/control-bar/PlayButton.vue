@@ -1,5 +1,5 @@
 <template>
-    <div class="control-button" @click="onClick">
+    <div id="play-button" class="control-button" @click="onClick">
         {{ buttonText }}
     </div>
 </template>

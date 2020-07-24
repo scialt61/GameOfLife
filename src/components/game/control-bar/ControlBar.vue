@@ -2,17 +2,20 @@
     <div id="control-bar">
         <play-button />
         <clear-button />
+        <tickrate-button />
     </div>
 </template>
 
 <script>
     import ClearButton from "./ClearButton.vue";
     import PlayButton from "./PlayButton.vue";
+    import TickrateButton from "./TickrateButton.vue";
 
     export default {
         components: {
             "clear-button": ClearButton,
-            "play-button": PlayButton
+            "play-button": PlayButton,
+            "tickrate-button": TickrateButton
         }
     };
 </script>
@@ -21,7 +24,7 @@
     #control-bar {
         display: grid;
 
-        grid-template-columns: 25% 25% auto;
+        grid-template-columns: 25% 25% 25% auto;
 
         border-top: solid 3px rgb(25, 25, 25);
     }
