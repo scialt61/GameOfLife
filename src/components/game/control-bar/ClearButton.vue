@@ -1,5 +1,5 @@
 <template>
-    <div class="control-button" @click="clear">Clear</div>
+    <div id="clear-button" class="control-button" @click="clear">Clear</div>
 </template>
 
 <script>
