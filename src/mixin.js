@@ -2,7 +2,42 @@ import Cell from "./classes/Cell.js";
 
 // Main mixin used for the game
 export default {
+    data() {
+        // Config values
+        const configs = {
+            // Dimensions of the grid
+            rows: 43,
+            columns: 96,
+
+            // Size of a cell in pixels
+            cellSize: 20
+        };
+
+        // Default values
+        const defaultValues = {
+            // Default value of a cell
+            cellValue: Cell(false)
+        };
+
+        return {
+            configs,
+            defaultValues
+        };
+    },
+    
     methods: {
+        /* Misc. utility functions */
+        // Creates an array filled with cells
+        filledArray: (length, cell) => {
+            let array = [];
+        
+            for (let i = 0; i < length; i++) {
+                array.push({...cell});
+            }
+        
+            return array;
+        },
+
         /* Getters and Setters */
         // Returns the number of rows
         getNumRows() {
@@ -63,9 +98,39 @@ export default {
             return this.$store.state.active;
         },
 
+        // Sets if the game is active
+        setActive(active) {
+            this.$store.commit("setActive", active);
+        },
+
         // Toggles if the game is active
         toggleActive() {
-            this.$store.commit("setActive", !this.isActive());
+            this.setActive(!this.isActive());
+        },
+
+        // Updates the cells
+        updateCells() {
+            this.setCells(this.getResultOfTick());
+        },
+
+        // Clears the array of cells
+        clearCells() {
+            this.setCells(this.filledArray(this.getNumRows() * this.getNumColumns(), this.defaultValues.cellValue));
+        },
+
+        // Returns the number of times paused
+        getTimesPaused() {
+            return this.$store.state.timesPaused;
+        },
+
+        // Sets the number of times paused
+        setTimesPaused(value) {
+            this.$store.commit("setTimesPaused", value);
+        },
+
+        // Increments the number of times paused
+        incrementTimesPaused() {
+            this.setTimesPaused(this.getTimesPaused() + 1);
         },
 
         /* Helper functions */
@@ -109,11 +174,6 @@ export default {
         getResultOfTick() {
             return this.getCells()
                 .map((_, index) => Cell(this.shouldCellSurvive(index)));
-        },
-
-        // Updates the cells
-        updateCells() {
-            this.setCells(this.getResultOfTick());
         }
     }
 };
