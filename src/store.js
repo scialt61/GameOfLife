@@ -24,13 +24,21 @@ export default new Vuex.Store({
         columns: config.columns,
 
         // Represents the cells used in the game (uses 1D array with getter functions)
-        cells: filledArray(config.rows * config.columns, Cell(false))
+        cells: filledArray(config.rows * config.columns, Cell(false)),
+
+        // Represents if the game is active
+        active: false
     },
 
     mutations: {
         // Sets the value of a cell
         setCell(state, { row, column, value }) {
             state.cells[row * state.columns + column].alive = value;
+        },
+
+        // Sets if the game is active
+        setActive(state, active) {
+            state.active = active;
         }
     }
 });
