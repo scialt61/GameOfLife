@@ -17,15 +17,21 @@
             "game-container": GameContainer
         },
 
+        methods: {
+            // Runs every tick
+            tick() {
+                if (this.isActive())
+                    this.updateCells();
+
+                setTimeout(this.tick, this.getTickrate());
+            }
+        },
+
         created() {
             // Initializes cell array
             this.clearCells();
 
-            setInterval(() => {
-                if (this.isActive()) {
-                    this.updateCells();
-                }
-            }, this.configs.tickRate);
+            this.tick();
         }
     };
 </script>

@@ -13,7 +13,7 @@ export default {
             cellSize: 20,
 
             // Tickrate in ms
-            tickRate: 200
+            tickrate: 200
         };
 
         // Default values
@@ -136,6 +136,16 @@ export default {
             this.setTimesPaused(this.getTimesPaused() + 1);
         },
 
+        // Returns the tickrate
+        getTickrate() {
+            return this.$store.state.tickrate;
+        },
+
+        // Sets the tickrate
+        setTickrate(value) {
+            this.$store.commit("setTickrate", value);
+        },
+
         /* Helper functions */
         // Checks if an index (row, column) is valid
         isIndexValid(row, column) {
@@ -158,6 +168,11 @@ export default {
             .map(index => this.getCellAt(index[0], index[1]));
         },
 
+        // Counts the number of living neighbor cells
+        countAliveNeighborCells(row, column) {
+            return this.getNeighborCells(row, column).filter(cell => cell.alive).length;
+        },
+
         // Returns if a cell at an index survives
         shouldCellSurvive(index) {
             let row = this.getRow(index);
@@ -165,18 +180,23 @@ export default {
 
             let cell = this.getCellAt(row, column);
 
-            let neighbors = this.getNeighborCells(row, column);
-
-            let countAliveNeighbors = neighbors.filter(cell => cell.alive).length;
+            let aliveNeighborsCount = this.countAliveNeighborCells(row, column);
 
             // Rules of game of life
-            return countAliveNeighbors === 3 || (cell.alive && countAliveNeighbors === 2);
+            return aliveNeighborsCount === 3 || (cell.alive && aliveNeighborsCount === 2);
+        },
+
+        // Returns if a cell is alive or has living neighbors
+        shouldCellUpdate(cell, index) {
+            return cell.alive || this.countAliveNeighborCells(this.getRow(index), this.getColumn(index)) > 0;
         },
 
         // Returns what the array of cells should look like after a tick
         getResultOfTick() {
             return this.getCells()
-                .map((_, index) => Cell(this.shouldCellSurvive(index)));
+                .map((cell, index) => 
+                    this.shouldCellUpdate(cell, index) ? Cell(this.shouldCellSurvive(index)) : cell
+                );
         }
     }
 };

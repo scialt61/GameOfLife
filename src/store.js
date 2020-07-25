@@ -25,7 +25,10 @@ export default new Vuex.Store({
         active: false,
 
         // Represents the number of times the game has been paused in a single simulation
-        timesPaused: 0
+        timesPaused: 0,
+
+        // Tickrate of the simulation
+        tickrate: configs.tickrate
     },
 
     mutations: {
@@ -47,6 +50,11 @@ export default new Vuex.Store({
         // Sets the times paused
         setTimesPaused(state, value) {
             state.timesPaused = value;
+        },
+
+        // Sets the tick rate
+        setTickrate(state, value) {
+            state.tickrate = value;
         }
     }
 });
