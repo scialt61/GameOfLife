@@ -8,7 +8,6 @@
             // Changes the tickrate
             changeTickrate() {
                 let value = parseInt(prompt("Enter Tickrate"));
-                console.log(value);
 
                 if (value === NaN)
                     alert("Enter a valid string!");

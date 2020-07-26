@@ -19,8 +19,8 @@
 
 <style scoped>
     #game-container {
-        width: 100%;
-        height: 100%;
+        grid-row: 1;
+        grid-column: 1;
 
         display: grid;
 

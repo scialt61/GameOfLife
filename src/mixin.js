@@ -22,9 +22,19 @@ export default {
             cellValue: Cell(false)
         };
 
+        // Enums
+        const enums = {
+            // Possible selector states
+            selectors: {
+                none: "none",
+                tickrate: "tickrate"
+            }
+        }
+
         return {
             configs,
-            defaultValues
+            defaultValues,
+            enums
         };
     },
     
@@ -144,6 +154,21 @@ export default {
         // Sets the tickrate
         setTickrate(value) {
             this.$store.commit("setTickrate", value);
+        },
+
+        // Returns the selector
+        getSelector() {
+            return this.$store.state.selector;
+        },
+
+        // Sets the selector
+        setSelector(value) {
+            this.$store.commit("setSelector", value);
+        },
+
+        // Closes the selector
+        closeSelector() {
+            this.setSelector(this.enums.selectors.none);
         },
 
         /* Helper functions */
