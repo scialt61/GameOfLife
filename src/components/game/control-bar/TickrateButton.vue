@@ -1,5 +1,5 @@
 <template>
-    <div id="tickrate-button" class="control-button" @click="changeTickrate">Change Tickrate</div>
+    <div id="tickrate-button" class="control-button" @click="setSelector(enums.selectors.tickrate)">Change Tickrate</div>
 </template>
 
 <script>
