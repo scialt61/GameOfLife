@@ -32,7 +32,10 @@ export default new Vuex.Store({
         tickrate: configs.tickrate,
         
         // Current open selector
-        selector: enums.selectors.none
+        selector: enums.selectors.none,
+
+        // Tracks if the game was active when entering a selector
+        wasActive: false
     },
 
     mutations: {
@@ -64,6 +67,11 @@ export default new Vuex.Store({
         // Sets the open selector
         setSelector(state, value) {
             state.selector = value;
+        },
+
+        // Sets wasActive
+        setWasActive(state, value) {
+            state.wasActive = value;
         }
     }
 });

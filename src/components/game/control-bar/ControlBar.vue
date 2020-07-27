@@ -31,22 +31,9 @@
 
         border-top: solid 3px rgb(25, 25, 25);
     }
-</style>
 
-<style>
     .control-button {
-        display: flex;
-
-        justify-content: center;
-        align-items: center;
-
-        color: rgb(255, 255, 255);
-
         font-size: 200%;
-
-        font-family: "Helvetica";
-
-        user-select: none;
     }
 
     .control-button:hover {

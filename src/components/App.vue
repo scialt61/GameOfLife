@@ -57,3 +57,18 @@
         grid-template-columns: auto;
     }
 </style>
+
+<style>
+    .text-component {
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+
+        color: rgb(255, 255, 255);
+
+        font-family: "Helvetica";
+
+        user-select: none;
+    }
+</style>
