@@ -65,6 +65,8 @@
         justify-content: center;
         align-items: center;
 
+        text-align: center;
+
         color: rgb(255, 255, 255);
 
         font-family: "Helvetica";
