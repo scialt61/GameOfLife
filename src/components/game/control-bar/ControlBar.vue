@@ -29,24 +29,12 @@
 
         grid-template-columns: 25% 25% 25% auto;
 
-        border-top: solid 3px rgb(25, 25, 25);
+        border-top: solid 2px black;
     }
-</style>
 
-<style>
     .control-button {
-        display: flex;
-
-        justify-content: center;
-        align-items: center;
-
-        color: rgb(255, 255, 255);
-
         font-size: 200%;
-
-        font-family: "Helvetica";
-
-        user-select: none;
+        border-right: solid 2px black;
     }
 
     .control-button:hover {

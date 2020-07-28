@@ -2,11 +2,13 @@
 <template>
     <div id="app">
         <game-container />
+        <selector-container v-if="getSelector() === enums.selectors.tickrate" />
     </div>
 </template>
 
 <script>
     import GameContainer from "./game/GameContainer.vue";
+    import SelectorContainer from "./selectors/SelectorContainer.vue";
 
     import mixin from "../mixin.js";
 
@@ -14,7 +16,8 @@
         mixins: [mixin],
 
         components: {
-            "game-container": GameContainer
+            "game-container": GameContainer,
+            "selector-container": SelectorContainer
         },
 
         methods: {
@@ -48,9 +51,26 @@
 
         background-color: rgb(35, 35, 35);
 
+        display: grid;
+
+        grid-template-rows: auto;
+        grid-template-columns: auto;
+    }
+</style>
+
+<style>
+    .text-component {
         display: flex;
 
         justify-content: center;
         align-items: center;
+
+        text-align: center;
+
+        color: rgb(255, 255, 255);
+
+        font-family: "Helvetica";
+
+        user-select: none;
     }
 </style>

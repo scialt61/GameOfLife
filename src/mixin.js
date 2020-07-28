@@ -22,9 +22,19 @@ export default {
             cellValue: Cell(false)
         };
 
+        // Enums
+        const enums = {
+            // Possible selector states
+            selectors: {
+                none: "none",
+                tickrate: "tickrate"
+            }
+        }
+
         return {
             configs,
-            defaultValues
+            defaultValues,
+            enums
         };
     },
     
@@ -144,6 +154,40 @@ export default {
         // Sets the tickrate
         setTickrate(value) {
             this.$store.commit("setTickrate", value);
+        },
+
+        // Returns the selector
+        getSelector() {
+            return this.$store.state.selector;
+        },
+
+        // Sets the selector
+        setSelector(value) {
+            this.$store.commit("setSelector", value);
+
+            if (value === this.enums.selectors.none) {
+                // Resumes the game if the game was active
+                this.setActive(this.wasActive());
+            } else {
+                // Pauses the game after tracking if the game is active
+                this.setWasActive(this.isActive());
+                this.setActive(false);
+            }
+        },
+
+        // Closes the selector
+        closeSelector() {
+            this.setSelector(this.enums.selectors.none);
+        },
+
+        // Gets if the game was active when entering a selector
+        wasActive() {
+            return this.$store.state.wasActive;
+        },
+
+        // Sets if the game was active when entering a selector
+        setWasActive(value) {
+            this.$store.commit("setWasActive", value);
         },
 
         /* Helper functions */

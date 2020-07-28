@@ -7,6 +7,7 @@ Vue.use(Vuex);
 
 // Loads data from mixin
 const configs = mixin.data().configs;
+const enums = mixin.data().enums;
 
 export default new Vuex.Store({
     state: {
@@ -28,7 +29,13 @@ export default new Vuex.Store({
         timesPaused: 0,
 
         // Tickrate of the simulation
-        tickrate: configs.tickrate
+        tickrate: configs.tickrate,
+        
+        // Current open selector
+        selector: enums.selectors.none,
+
+        // Tracks if the game was active when entering a selector
+        wasActive: false
     },
 
     mutations: {
@@ -55,6 +62,16 @@ export default new Vuex.Store({
         // Sets the tick rate
         setTickrate(state, value) {
             state.tickrate = value;
+        },
+
+        // Sets the open selector
+        setSelector(state, value) {
+            state.selector = value;
+        },
+
+        // Sets wasActive
+        setWasActive(state, value) {
+            state.wasActive = value;
         }
     }
 });

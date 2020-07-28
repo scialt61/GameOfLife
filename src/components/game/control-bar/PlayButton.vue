@@ -1,5 +1,5 @@
 <template>
-    <div id="play-button" class="control-button" @click="onClick">
+    <div id="play-button" class="control-button text-component" @click="onClick">
         {{ buttonText }}
     </div>
 </template>
@@ -9,19 +9,21 @@
         methods: {
             // Runs when the button is clicked
             onClick() {
-                // The game will be paused, so timePaused is incremented
-                if (this.isActive()) {
+                // Increments times paused if needed
+                if (this.isActive())
                     this.incrementTimesPaused();
-                }
 
                 this.toggleActive();
+                
+                // Updates wasActive as well
+                this.setWasActive(this.isActive());
             }
         },
 
         computed: {
             // Returns the string used for the button text
             buttonText() {
-                return this.isActive() ? "Pause" : this.getTimesPaused() === 0 ? "Start" : "Resume";
+                return this.isActive() || this.wasActive() ? "Pause" : this.getTimesPaused() === 0 ? "Start" : "Resume";
             }
         }
     };
